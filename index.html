@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wallet Snap</title>
+  </head>
+  <body>
+    <h1>Wallet Snap</h1>
+    <div>
+      <label>Create Wallet</label>
+      <button id="create-wallet" onclick="createWallet()">Generate</button>
+      <p id="create-wallet-response"></p>
+    </div>
+  </body>
+  <script>
+    function createWallet() {
+      const element = document.getElementById('create-wallet-response');
+      fetch('http://localhost:3000/api/create-wallet', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        element.innerHTML = data
+      })
+      .catch(error => {
+        element.innerHTML = 'Error: ' + error;
+      });
+    }
+  </script>
+</html>
